@@ -32,7 +32,7 @@ namespace my_app.Service.Controllers
                 }catch (HttpRequestException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    return NotFound();
+                    return NotFound("Not found");
                 }
             }
             
