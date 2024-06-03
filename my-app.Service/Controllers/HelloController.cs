@@ -14,7 +14,7 @@ namespace my_app.Service.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetEmployees()
+        public async  Task<IActionResult> GetEmployees()
         {   
             using (HttpClient client = new HttpClient())
             {
@@ -22,15 +22,16 @@ namespace my_app.Service.Controllers
                 try 
                 {
                          var response = await client.GetAsync(url);
-                         string responseBody = await response.Content.ReadAsStringAsync();
+                         string responseBody = await  response.Content.ReadAsStringAsync();
+                         
                          response.EnsureSuccessStatusCode();
 
-                         Console.WriteLine(responseBody)
+                         Console.WriteLine(responseBody);
                          return Ok(responseBody);
                 }catch (HttpRequestException ex)
                 {
                     Console.WriteLine(ex.Message);
-                    return NotFound;
+                    return NotFound();
                 }
             }
             
