@@ -14,6 +14,7 @@ namespace my_app.Service.Controllers
         }
 
         [HttpGet]
+         [Route("GetEmployees")]
         public async  Task<IActionResult> GetEmployees()
         {   
             using (HttpClient client = new HttpClient())
