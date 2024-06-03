@@ -7,7 +7,7 @@ spec:
     - name: GIT_URL
       value: "https://github.com/GolanMaimon/dotnet-app.git"
     - name: REGISTRY
-      value: golan-m
+      value: golanmaimon
     - name: IMAGE_NAME
       value: dotnet-app
     - name: IMAGE_TAG
