@@ -13,29 +13,35 @@ namespace my_app.Service.Controllers
             return Ok("Hello, World!");
         }
 
+         [HttpGet]
+        [Route("employ")]
+        public IActionResult GetEmploy()
+        {
+            return Ok("Golan Maimon");
+        }
+
         [HttpGet]
          [Route("GetEmployees")]
         public async  Task<IActionResult> GetEmployees()
-        {   
-            using (HttpClient client = new HttpClient())
+        {
+            using HttpClient client = new();
+            string url = "https://jsonplaceholder.typicode.com/users";
+            try
             {
-                string url = "https://jsonplaceholder.typicode.com/users";
-                try 
-                {
-                         var response = await client.GetAsync(url);
-                         string responseBody = await  response.Content.ReadAsStringAsync();
-                         
-                         response.EnsureSuccessStatusCode();
+                var response = await client.GetAsync(url);
+                string responseBody = await response.Content.ReadAsStringAsync();
 
-                         Console.WriteLine(responseBody);
-                         return Ok(responseBody);
-                }catch (HttpRequestException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return NotFound("Not found");
-                }
+                response.EnsureSuccessStatusCode();
+
+                Console.WriteLine(responseBody);
+                return Ok(responseBody);
             }
-            
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return NotFound("Not found");
+            }
+
 
         }
     }
