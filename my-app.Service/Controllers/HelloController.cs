@@ -12,5 +12,29 @@ namespace my_app.Service.Controllers
         {
             return Ok("Hello, World!");
         }
+
+        [HttpGet]
+        public IActionResult GetEmployees()
+        {   
+            using (HttpClient client = new HttpClient())
+            {
+                string url = "https://jsonplaceholder.typicode.com/users";
+                try 
+                {
+                         var response = await client.GetAsync(url);
+                         string responseBody = await response.Content.ReadAsStringAsync();
+                         response.EnsureSuccessStatusCode();
+
+                         Console.WriteLine(responseBody)
+                         return Ok(responseBody);
+                }catch (HttpRequestException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return NotFound;
+                }
+            }
+            
+
+        }
     }
 }
